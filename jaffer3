@@ -1,0 +1,121 @@
+*******************************************************************event driven****************************************************************************************
+
+package assignment2;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Jaafar Khalafat
+ */
+public class EventDriven extends JFrame implements ActionListener {
+
+    JTextField tf = new JTextField("This is my text");
+    JButton but = new JButton("Jafaar");
+
+    public EventDriven() {
+
+        setTitle("Event Driven Example - Jaafar Khalafat");
+        but.addActionListener(this);
+
+        Container c = getContentPane();
+        tf.setSize(200, 10);
+        tf.setBounds(100, 200, 20, 40);
+        c.add(tf);
+
+        c.add(but);
+
+        setSize(800, 500);
+        setLayout(new FlowLayout());
+        setVisible(true);
+
+    }
+
+    
+    public void actionPerformed(ActionEvent e) {
+      
+        tf.setText("Button clicked");
+        getContentPane().setBackground(Color.red);
+
+    }
+
+    public static void main(String[] args) {
+        new EventDriven();
+
+    }
+}
+************************************************************************procedural*************************************************************************************
+package assignment2;
+
+/**
+ *
+* @author Jaafar Khalafat
+ */
+public class Procedural {
+    
+   public Procedural(){}    
+    
+    
+    public static void printMyInProcedure(String str){
+        System.out.println(str);
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+              
+      printMyInProcedure ("This is example on procedural programming ");
+      
+    }
+    
+}
+***************************************************************************object oriented*****************************************************************************
+package assignment2;
+
+/**
+ *
+ * @author Jaafar Khalafat
+ */
+public class ObjectOriented {
+    
+    
+    public  static  class Animal 
+{
+ void eat()
+ {
+  System.out.println(" Animal may eat meat or grass ");
+ }
+}
+
+
+
+public static class  Dog extends Animal 
+{
+ void sound()
+ {
+  System.out.println("I bark!! ");
+ }
+ 
+ void eat()
+ {
+  System.out.println("Dog eat meat ");
+ }
+}
+
+public static void main(String args[]){
+    Animal animal = new Animal();
+    animal.eat();
+    Animal dog = new Dog();
+    dog.eat();
+    
+}
+    
+}
