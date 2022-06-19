@@ -1,0 +1,89 @@
+package assignment;
+
+/**
+ *
+ * @author Jaafar Khalafat
+ */
+import java.awt.*;
+import java.util.ArrayList;
+import javax.swing.*;
+
+class NumbersConversionFrame extends JFrame {
+
+    GridLayout original = new GridLayout();
+
+    GridLayout decimalResultLayout = new GridLayout();
+    GridLayout digitalResultLayout = new GridLayout();
+
+    NumbersConversionFrame() {
+        setTitle("Binary, Decimal & Digital - Programmed by Jaafar Khlafat");
+
+        original.setColumns(1);
+        original.setRows(3);
+        setLayout(original);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(500, 480);
+        setLocationRelativeTo(null);
+
+        NumbersManipulation obj = new NumbersManipulation();
+
+        String inputBinaryStr = JOptionPane.showInputDialog("Please Insert Binary Number", null);
+        if (inputBinaryStr != null) {
+            inputBinaryStr = inputBinaryStr.trim();
+        }
+        boolean isValidBinary = obj.validateBinary(inputBinaryStr);
+
+        if (!isValidBinary) {
+            JOptionPane.showMessageDialog(null, "Error : Invalid Binary Number", "Error", JOptionPane.ERROR_MESSAGE);
+            inputBinaryStr = JOptionPane.showInputDialog("Insert Binary Number", null);
+
+        }
+
+        int inputBunaryNo = Integer.parseInt(inputBinaryStr);
+        int decimalResult = obj.convertFromBinaryToDecimal(inputBunaryNo);
+
+        ArrayList<String> arrayOfDigits = obj.splitDecimalIntoDigits(decimalResult);
+
+        MyTextAreaPanel insideDecimalResultPanel = new MyTextAreaPanel("Binary No (" + inputBunaryNo
+                + ") is (" + decimalResult + ") In Decimal");
+
+        JPanel decimalResultPanel = new JPanel(decimalResultLayout);
+        JPanel digitalFormatResultLabelPanel = new JPanel(decimalResultLayout);
+        digitalFormatResultLabelPanel.add(new JLabel("  The Digital Format of  " + decimalResult));
+
+        decimalResultPanel.add(insideDecimalResultPanel);
+
+        JPanel digitalResultPanel = new JPanel(digitalResultLayout);
+
+        MyTextAreaPanel insideDigitalResultPanel = new MyTextAreaPanel("");
+        for (int i = arrayOfDigits.size() - 1; i >= 0; i--) {
+            insideDigitalResultPanel = new MyTextAreaPanel(obj.convertToSevenSegments(Integer.parseInt(arrayOfDigits.get(i))));
+            digitalResultPanel.add(insideDigitalResultPanel);
+        }
+
+        add(decimalResultPanel);
+        add(digitalFormatResultLabelPanel);
+        add(digitalResultPanel);
+
+    }
+
+    //Main method
+    public static void main(String[] args) {
+
+        new NumbersConversionFrame().setVisible(true);
+    }
+}
+
+class MyTextAreaPanel extends JPanel {
+
+    MyTextAreaPanel(String title) {
+        JTextArea digit = new JTextArea();
+        Font myFont = new Font(Font.SERIF, Font.BOLD, 14);
+        digit.setFont(myFont);
+        digit.setText(title);
+        digit.setEditable(false);
+        digit.setColumns(5);
+        digit.setRows(3);
+        this.add(digit);
+    }
+}
