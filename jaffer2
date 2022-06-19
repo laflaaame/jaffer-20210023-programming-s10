@@ -1,0 +1,90 @@
+package assignment;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Jaafar Khalafat
+ */
+public class NumbersManipulation {
+
+    /**
+     * @param args the command line arguments
+     */
+    public boolean validateBinary(String binary) {
+        for (int i = 0; i < binary.length(); i++) {
+            if (binary.charAt(i) != '0' && binary.charAt(i) != '1') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int convertFromBinaryToDecimal(int binary) {
+        int decimal = 0;
+        int n = 0;
+        while (binary > 0) {
+
+            int temp = binary % 10;
+            decimal += temp * Math.pow(2, n);
+            binary = binary / 10;
+            n++;
+
+        }
+        return decimal;
+    }
+
+    public String convertToSevenSegments(int n) {
+        String result = "";
+        switch (n) {
+            case 0:
+                result = " _ \n|  | \n|_|";
+                // result =" _ \n| | \n|_|";  
+                break;
+            case 1:
+                result = "   \n  |\n  |";
+                break;
+            case 2:
+                result = " _ \n _|\n|_ ";
+                break;
+            case 3:
+                result = " _ \n _|\n _|";
+                break;
+            case 4:
+                result = "   \n|_|\n   |";
+                //result ="   \n|_|\n  |";  
+                break;
+            case 5:
+                result = " _ \n|_ \n _|";
+                break;
+            case 6:
+                result = " _ \n|_ \n|_|";
+                break;
+            case 7:
+
+                // result =" _ \n  |\n  |";  
+                result = " _\n   |\n   |";
+                break;
+            case 8:
+                result = " _ \n|_|\n|_|";
+                break;
+            case 9:
+                result = " _ \n|_|\n _|";
+                break;
+        }
+        return result;
+    }
+
+    public ArrayList<String> splitDecimalIntoDigits(int n) {
+        ArrayList<String> arrayDigits = new ArrayList<String>();
+        while (n > 0) {
+            arrayDigits.add("" + n % 10);
+            n = n / 10;
+        }
+        return arrayDigits;
+    }
+
+    
+
+}
